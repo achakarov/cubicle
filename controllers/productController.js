@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const productService = require('../services/productService');
+const {validateProduct} = require('./helpers/productHelpers');
 const router = Router()
 
 router.get('/', (req, res) => {
@@ -21,20 +22,6 @@ router.get('/details/:productId', (req, res) => {
     let product = productService.getOne(req.params.productId);
     res.render('details', { title: 'Product Details', product });
 });
-
-function validateProduct(req, res, next) {
-    let isValid = true;
-
-    if (req.body.name.trim().length < 2) {
-        isValid = false;
-    } else if (!req.body.imageUrl) {
-        isValid = false;
-    }
-
-    if (isValid) {
-        next();
-    }
-}
 
 
 module.exports = router; 
