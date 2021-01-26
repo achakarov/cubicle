@@ -1,6 +1,7 @@
 const uniqid = require('uniqid');
 const Cube = require('../models/Cube');
 const fs = require('fs');
+const path = require('path');
 let productsData = require('../config/products.json');
 
 function getAll() {
@@ -22,7 +23,7 @@ function create(data) {
 
     productsData.push(cube);
 
-    fs.writeFile(__dirname + '/../config/products.json', JSON.stringify(productsData), (err) => {
+    fs.writeFile(path.join(__dirname + '/../config/products.json'), JSON.stringify(productsData), (err) => {
         if (err) {
             console.log(err);
             return;
