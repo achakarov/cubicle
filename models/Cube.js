@@ -19,6 +19,14 @@ class Cube {
             JSON.stringify(productsDb)
         );
     }
+
+    static getAll() {
+        return productsDb;
+    }
+    
+    static getOne(id) {
+        return productsDb.find(x => x.id === id);
+    }
 }
 
 module.exports = Cube;
