@@ -9,12 +9,12 @@ function getAll() {
     return Accessory.find().lean();
 }
 
-function getAllWithout(ids) {
+function getAllUnattached(ids) {
     return Accessory.find({ _id: { $nin: ids } }).lean();
 }
 
 module.exports = {
     create,
     getAll,
-    getAllWithout
+    getAllUnattached
 }
