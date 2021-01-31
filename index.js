@@ -5,6 +5,7 @@ const routes = require('./routes')
 const app = express();
 
 expressConfig(app);
+require('./config/mongoose')(app);
 
 app.use(routes);
 
