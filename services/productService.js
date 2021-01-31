@@ -24,7 +24,9 @@ function getAll(query) {
 }
 
 function getOne(id) {
-    return productData.getOne(id);
+    // return productData.getOne(id);
+    return Cube.getOne(id);
+
 }
 
 function create(data, callback) {
