@@ -23,8 +23,9 @@ router.post('/create', validateProduct, (req, res) => {
         .catch(() => res.status(500).end());
 });
 
-router.get('/details/:productId', (req, res) => {
-    let product = productService.getOne(req.params.productId);
+router.get('/details/:productId', async (req, res) => {
+    let product = await productService.getOne(req.params.productId)
+
     res.render('details', { title: 'Product Details', product });
 });
 

@@ -19,7 +19,8 @@ async function getAll(query) {
 }
 
 function getOne(id) {
-    return Cube.findById(id);
+    return Cube.findById(id).lean();
+
 }
 
 function create(data) {
