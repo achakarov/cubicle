@@ -16,10 +16,6 @@ const accesorySchema = new mongoose.Schema({
         required: true,
         validate: /^https?/
     },
-    cubes: [{
-        type: mongoose.Types.ObjectId,
-        ref: 'Cube'
-    }]
 });
 
 module.exports = mongoose.model('Accessory', accesorySchema); 
