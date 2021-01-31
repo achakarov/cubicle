@@ -36,7 +36,8 @@ function create(data, callback) {
 
 
     // fs.writeFile(path.join(__dirname + '/../config/products.json'), JSON.stringify(productsData), callback);
-    return productData.create(cube);
+    // return productData.create(cube);
+   return cube.save();
 }
 
 module.exports = {
