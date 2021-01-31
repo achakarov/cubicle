@@ -32,7 +32,7 @@ router.get('/details/:productId', async (req, res) => {
 
 router.get('/:productId/attach', async (req, res) => {
     let product = await productService.getOne(req.params.productId);
-    let accessories = await accessoryService.getAll();
+    let accessories = await accessoryService.getAllWithout(product.accessories);
 
     
 
