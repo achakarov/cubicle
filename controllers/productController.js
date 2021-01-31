@@ -1,12 +1,15 @@
 const { Router } = require('express');
 const productService = require('../services/productService');
 const { validateProduct } = require('./helpers/productHelpers');
-const router = Router()
+const router = Router();
 
 router.get('/', (req, res) => {
 
-    let products = productService.getAll(req.query);
-    res.render('home', { title: 'Home', products });
+    productService.getAll(req.query)
+        .then(products => {
+            res.render('home', { title: 'Browse', products });
+        })
+        .catch(() => res.status(500).end());
 });
 
 router.get('/create', (req, res) => {
@@ -14,14 +17,6 @@ router.get('/create', (req, res) => {
 });
 
 router.post('/create', validateProduct, (req, res) => {
-
-    // productService.create(req.body, (err) => {
-    //     if (err) {
-    //         return res.status(400).end()
-    //     }
-
-    //     res.redirect('/products');
-    // });
 
     productService.create(req.body)
         .then(() => res.redirect('/products'))
