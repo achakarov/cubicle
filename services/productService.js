@@ -28,8 +28,13 @@ function create(data) {
     return cube.save();
 }
 
+async function attachAccessory(productId, accessoryId) {
+    let cube = await Cube.findById(productId);
+}
+
 module.exports = {
     create,
     getAll,
-    getOne
+    getOne,
+    attachAccessory
 }
