@@ -10,6 +10,8 @@ module.exports = function () {
                     res.clearCookie("USER_SESSION");
                 } else {
                     req.user = decoded;
+                    res.locals.user = decoded;
+                    res.locals.isAuthenticated = true;
                 }
             });
         }

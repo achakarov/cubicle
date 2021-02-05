@@ -8,7 +8,7 @@ const authController = require('./controllers/authController');
 const router = Router();
 
 router.use('/products', productController);
-router.use('/auth', isGuest, authController);
+router.use('/auth', authController);
 router.use('/accessories', accessoryController);
 router.use('/', homeController);
 router.get('*', (req, res) => {
