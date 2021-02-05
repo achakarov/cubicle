@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const { Router, response } = require('express');
 const productService = require('../services/productService');
 const accessoryService = require('../services/accessoryService');
 const { validateProduct } = require('./helpers/productHelpers');
@@ -49,6 +49,16 @@ router.get('/:productId/edit', isAuthenticated, (req, res) => {
     productService.getOne(req.params.productId)
         .then(product => {
             res.render('editCubePage', product);
+        });
+});
+
+router.post('/:productId/edit', isAuthenticated, validateProduct, (req, res) => {
+    productService.updateOne(req.params.productId, req.body)
+        .then(response => {
+            res.redirect(`/products/${req.params.productId}/details`);
+        })
+        .catch(err => {
+            console.log(err);
         });
 });
 

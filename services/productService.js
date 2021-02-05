@@ -40,10 +40,15 @@ function getOneWithAccesories(id) {
     return Cube.findById(id).populate('accessories').lean();
 }
 
+function updateOne(productId, productData) {
+    return Cube.updateOne({ _id: productId }, productData);
+}
+
 module.exports = {
     create,
     getAll,
     getOne,
     attachAccessory,
-    getOneWithAccesories
+    getOneWithAccesories,
+    updateOne
 }
