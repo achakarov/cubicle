@@ -45,4 +45,11 @@ router.post('/:productId/attach', isAuthenticated, (req, res) => {
         .catch(() => res.status(500).end());
 });
 
+router.get('/:productId/edit', isAuthenticated, (req, res) => {
+    productService.getOne(req.params.productId)
+        .then(product => {
+            res.render('editCubePage', product);
+        });
+});
+
 module.exports = router; 
