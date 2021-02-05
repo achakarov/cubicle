@@ -12,7 +12,6 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
-    //    console.log(req.body);
     try {
         let user = await authService.register(req.body);
         res.redirect('/auth/login');
@@ -27,7 +26,7 @@ router.post('/login', async (req, res) => {
     try {
         let token = await authService.login({ username, password });
         res.cookie('USER_SESSION', token);
-        res.redirect('/products'); 
+        res.redirect('/products');
     } catch (error) {
         console.log(error);
         res.render('login', { error });
