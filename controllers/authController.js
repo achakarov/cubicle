@@ -22,4 +22,15 @@ router.post('/register', async (req, res) => {
     }
 });
 
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        let token = await authService.login({ username, password });
+        res.cookie('USER_SESSION', token);
+    } catch (error) {
+        console.log(error);
+        res.render('login', { error });
+    }
+});
+
 module.exports = router;
