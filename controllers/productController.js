@@ -52,6 +52,8 @@ router.get('/:productId/edit', isAuthenticated, (req, res) => {
         });
 });
 
+//TODO Show the edit & delete buttons only if I am the creator
+
 router.post('/:productId/edit', isAuthenticated, validateProduct, (req, res) => {
     productService.updateOne(req.params.productId, req.body)
         .then(response => {
