@@ -3,8 +3,6 @@ const router = Router();
 const authService = require('../services/auhtService');
 const isAuthenticated = require('../middlewares/isAuthenticated');
 const isGuest = require('../middlewares/isGuest');
-// const validator = require('validator');
-const { validationResult, body } = require('express-validator');
 
 router.get('/login', isGuest, (req, res) => {
     res.render('login');
@@ -16,29 +14,20 @@ router.get('/register', isGuest, (req, res) => {
 
 router.post('/register',
     isGuest,
-    // body('email', 'Not valid email').isEmail().normalizeEmail(),
-    // body('username', 'Specify username').notEmpty(),
-    // body('password', 'Password must be at least 5 characters').isLength({ min: 5, max: 250 }),
+
     async (req, res) => {
         const { username, password, repeatPassword } = req.body;
-        // let isStrongPassword = validator.isStrongPassword(password);
 
-        let errors = validationResult(req)
-        if (errors.errors.length > 0) {
-            return res.render('register', errors);
+        if (password !== repeatPassword) {
+            return res.render('register', { error: { message: 'Passwords must match' } });
         }
 
         try {
-            // if (!isStrongPassword) {
-            //     throw { message: "You should have a strong password" };
-            // }
-
-            let user = await authService.register(req.body);
+            let user = await authService.register(username, password);
             res.redirect('/auth/login');
         } catch (error) {
             let errors = Object.keys(error.errors).map(x => ({ msg: error.errors[x].message }));
             res.render('register', { errors });
-            return;
         }
     });
 
