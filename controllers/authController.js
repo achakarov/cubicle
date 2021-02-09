@@ -3,6 +3,7 @@ const router = Router();
 const authService = require('../services/auhtService');
 const isAuthenticated = require('../middlewares/isAuthenticated');
 const isGuest = require('../middlewares/isGuest');
+const validator = require('validator');
 
 router.get('/login', isGuest, (req, res) => {
     res.render('login');
@@ -13,7 +14,15 @@ router.get('/register', isGuest, (req, res) => {
 });
 
 router.post('/register', isGuest, async (req, res) => {
+    const { username, password, repeatPassword } = req.body; 4
+    let isStrongPassword = validator.isStrongPassword(password);
+
     try {
+
+        if (!isStrongPassword) {
+            throw { message: "You should have a strong password" };
+        }
+
         let user = await authService.register(req.body);
         res.redirect('/auth/login');
     } catch (error) {
