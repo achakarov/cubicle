@@ -16,9 +16,9 @@ router.get('/register', isGuest, (req, res) => {
 
 router.post('/register',
     isGuest,
-    body('email', 'Not valid email').isEmail().normalizeEmail(),
-    body('username', 'Specify username').notEmpty(),
-    body('password', 'Password must be at least 5 characters').isLength({ min: 5, max: 250 }),
+    // body('email', 'Not valid email').isEmail().normalizeEmail(),
+    // body('username', 'Specify username').notEmpty(),
+    // body('password', 'Password must be at least 5 characters').isLength({ min: 5, max: 250 }),
     async (req, res) => {
         const { username, password, repeatPassword } = req.body;
         // let isStrongPassword = validator.isStrongPassword(password);
@@ -36,7 +36,8 @@ router.post('/register',
             let user = await authService.register(req.body);
             res.redirect('/auth/login');
         } catch (error) {
-            res.render('register', { error });
+            let errors = Object.keys(error.errors).map(x => ({ msg: error.errors[x].message }));
+            res.render('register', { errors });
             return;
         }
     });
