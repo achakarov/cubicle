@@ -4,13 +4,13 @@ const userSchema = new mongoose.Schema({
     id: mongoose.Types.ObjectId,
     username: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
         required: true
     }
 });
-
 
 module.exports = mongoose.model('User', userSchema); 
