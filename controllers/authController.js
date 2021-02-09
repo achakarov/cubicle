@@ -14,20 +14,19 @@ router.get('/register', isGuest, (req, res) => {
 
 router.post('/register',
     isGuest,
-
     async (req, res) => {
         const { username, password, repeatPassword } = req.body;
 
-        if (password !== repeatPassword) {
-            return res.render('register', { error: { message: 'Passwords must match' } });
-        }
+        // if (password !== repeatPassword) {
+        //     return res.render('register', { error: { message: 'Passwords must match' } });
+        // }
 
         try {
-            let user = await authService.register(username, password);
+            let user = await authService.register({username, password});
             res.redirect('/auth/login');
-        } catch (error) {
-            let errors = Object.keys(error.errors).map(x => ({ msg: error.errors[x].message }));
-            res.render('register', { errors });
+        } catch (err) {
+            let error = Object.keys(err?.errors).map(x => ({ message: err.errors[x].properties.message }));
+            res.render('register', { error });
         }
     });
 
