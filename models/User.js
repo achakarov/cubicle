@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
             validator: (value) => {
                 return ENGLISH_ALPHANUMERIC_PATTERN.test(value);
             },
-            message: (props) => `${props.value}is invalid username. It should contain only English letters or digits!`,
+            message: (props) => `${props.value}is invalid username. It should contain only English letters or digits!`
         }
     },
     password: {
@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
             validator: (value) => {
                 return ENGLISH_ALPHANUMERIC_PATTERN.test(value);
             },
-            message: (props) => `Password should contain only English letters or digits!`,
+            message: (props) => `Password should contain only English letters or digits!`
         }
     },
     

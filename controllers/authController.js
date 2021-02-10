@@ -24,7 +24,8 @@ router.post('/register',
         try {
             let user = await authService.register({ username, password });
             res.redirect('/auth/login');
-        } catch (error) {
+        } catch (err) {
+            let error = Object.keys(err?.errors).map(x => ({ message: err.errors[x].properties.message}))[0];
             res.render('register', { error });
         }
     });
