@@ -19,7 +19,7 @@ const login = async ({ username, password }) => {
     //compare password & hash
     let isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-        throw { message: 'Password does not match' };
+        throw { message: 'Password is incorrect' };
     }
 
     //generate token
