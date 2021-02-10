@@ -40,8 +40,8 @@ function getOneWithAccesories(id) {
     return Cube.findById(id).populate('accessories').lean();
 }
 
-function updateOne(productId, productData) {
-    return Cube.updateOne({ _id: productId }, productData);
+async function updateOne(productId, productData) {
+    return await Cube.updateOne({ _id: productId }, productData);
 }
 
 function deleteOne(productId) {

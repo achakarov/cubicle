@@ -59,7 +59,7 @@ router.get('/:productId/edit', isAuthenticated, (req, res) => {
 router.post('/:productId/edit', isAuthenticated, validateProduct, (req, res) => {
     productService.updateOne(req.params.productId, req.body)
         .then(response => {
-            res.redirect(`/products/${req.params.productId}/details`);
+            res.redirect(`/products/details/${req.params.productId}`);
         })
         .catch(err => {
             console.log(err);
