@@ -4,21 +4,9 @@ const jwt = require('jsonwebtoken');
 const saltRounds = 10;
 const secret = 'megaSecret';
 
-const register = async (userData) => {
-    if (userData.password !== userData.repeatPassword) {
-        throw { message: 'Passwords not matching' }
-    }
-    try {
-        //TODO: Check if user exists - .find
-
-        let salt = await bcrypt.genSalt(saltRounds);
-        let hash = await bcrypt.hash(userData.password, salt);
-
-        const user = new User({ username: userData.username, password: hash });
-        return user.save();
-    } catch (error) {
-        console.log(error);
-    }
+const register = async ({ username, password }) => {
+    const user = new User({ username, password });
+    return await user.save();
 }
 
 const login = async ({ username, password }) => {

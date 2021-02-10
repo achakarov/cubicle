@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const { Router, response } = require('express');
 const productService = require('../services/productService');
 const accessoryService = require('../services/accessoryService');
 const { validateProduct } = require('./helpers/productHelpers');

@@ -7,8 +7,6 @@ const authController = require('./controllers/authController');
 
 const router = Router();
 
-router.get('/test')
-
 router.use('/products', productController);
 router.use('/auth', authController);
 router.use('/accessories', accessoryController);

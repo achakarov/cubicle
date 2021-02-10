@@ -1,7 +1,7 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
 const cookieParser = require('cookie-parser');
-const auth = require('../middlewares/auth');
+const auth = require('../middlewares/auth'); 
 
 function setupExpress(app) {
     app.engine('hbs', handlebars({
@@ -16,9 +16,9 @@ function setupExpress(app) {
         extended: true
     }));
 
-    app.use(cookieParser());
+    app.use(cookieParser()); 
 
-    app.use(auth());
+    app.use(auth()); 
 }
 
 module.exports = setupExpress; 
