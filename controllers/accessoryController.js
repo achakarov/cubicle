@@ -12,7 +12,10 @@ router.get('/create', isAuthenticated, (req, res) => {
 router.post('/create', isAuthenticated, (req, res) => {
     accessoryService.create(req.body)
         .then(() => res.redirect('/products'))
-        .catch(() => res.status(500).end());
+        .catch((err) => {
+            let error = Object.keys(err?.errors).map(x => ({ message: err.errors[x].properties.message }))[0];
+            res.render('createAccessory', { error });
+        });
 });
 
 module.exports = router;
