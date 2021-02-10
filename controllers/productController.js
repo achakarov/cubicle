@@ -18,11 +18,14 @@ router.get('/create', isAuthenticated, (req, res) => {
     res.render('create', { title: 'Create' });
 });
 
-router.post('/create', isAuthenticated, validateProduct, (req, res) => {
+router.post('/create', isAuthenticated, (req, res) => {
 
     productService.create(req.body, req.user)
         .then(() => res.redirect('/products'))
-        .catch(() => res.status(500).end('Error from controller'));
+        .catch((err) => {
+            let error = Object.keys(err?.errors).map(x => ({ message: err.errors[x].properties.message }))[0];
+            res.render('create', { error });
+        });
 });
 
 router.get('/details/:productId', async (req, res) => {
