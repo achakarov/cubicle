@@ -5,7 +5,7 @@ const config = {
     },
     production: {
         PORT: 80,
-        DB_CONNECTION:'mongodb+srv://admin:admin@cubicles.ncdxd.mongodb.net/cubicle?retryWrites=true&w=majority'
+        DB_CONNECTION:'mongodb+srv://[INSERT USER]:[INSERT PASSWORD]@cubicles.ncdxd.mongodb.net/cubicle?retryWrites=true&w=majority'
     }
 }
 
