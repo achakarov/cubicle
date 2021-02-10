@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const accessoryService = require('../services/accessoryService');
 const isAuthenticated = require('../middlewares/isAuthenticated');
-const isGuest = require('../middlewares/isGuest');
 
 const router = Router();
 

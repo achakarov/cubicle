@@ -36,7 +36,6 @@ router.post('/login', isGuest, async (req, res) => {
         res.cookie('USER_SESSION', token);
         res.redirect('/products');
     } catch (error) {
-        // console.log(error);
         res.render('login', { error });
     }
 });
