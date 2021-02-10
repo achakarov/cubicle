@@ -15,7 +15,6 @@ router.get('/register', isGuest, (req, res) => {
 router.post('/register',
     isGuest,
     async (req, res) => {
-
         const { username, password, repeatPassword } = req.body;
         if (password !== repeatPassword) {
             return res.render('register', { message: 'Passwords do not match!' });
