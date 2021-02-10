@@ -1,4 +1,4 @@
-exports.validateProduct = function(req, res, next) {
+module.exports.validateProduct = function(req, res, next) {
     let isValid = true;
 
     if (req.body.name.trim().length < 2) {

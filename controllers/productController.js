@@ -1,9 +1,8 @@
-const { Router, response } = require('express');
+const { Router } = require('express');
 const productService = require('../services/productService');
 const accessoryService = require('../services/accessoryService');
 const { validateProduct } = require('./helpers/productHelpers');
 const isAuthenticated = require('../middlewares/isAuthenticated');
-const isGuest = require('../middlewares/isGuest');
 const router = Router();
 
 router.get('/', (req, res) => {
@@ -23,7 +22,7 @@ router.post('/create', isAuthenticated, validateProduct, (req, res) => {
 
     productService.create(req.body, req.user)
         .then(() => res.redirect('/products'))
-        .catch(() => res.status(500).end());
+        .catch(() => res.status(500).end('Error from controller'));
 });
 
 router.get('/details/:productId', async (req, res) => {
