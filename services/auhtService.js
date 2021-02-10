@@ -1,7 +1,6 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const saltRounds = 10;
 const secret = 'megaSecret';
 
 const register = async ({ username, password }) => {
