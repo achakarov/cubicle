@@ -27,7 +27,14 @@ const login = async ({ username, password }) => {
     return token;
 }
 
+const getIdFromToken = async (token) => {
+    const decoded = jwt.verify(token, secret);
+    var userId = await decoded._id
+    return userId;
+}
+
 module.exports = {
     register,
-    login
+    login,
+    getIdFromToken
 }

@@ -4,6 +4,7 @@ const accessoryService = require('../services/accessoryService');
 const { validateProduct } = require('./helpers/productHelpers');
 const isAuthenticated = require('../middlewares/isAuthenticated');
 const router = Router();
+const authService = require('../services/auhtService');
 
 router.get('/', (req, res) => {
 
@@ -29,9 +30,12 @@ router.post('/create', isAuthenticated, (req, res) => {
 });
 
 router.get('/details/:productId', async (req, res) => {
-    let product = await productService.getOneWithAccesories(req.params.productId)
-
-    res.render('details', { title: 'Product Details', product });
+    let product = await productService.getOneWithAccesories(req.params.productId);
+    let creatorId = product.creator;
+    let token = req.cookies["USER_SESSION"];
+    let currentId = await authService.getIdFromToken(token);
+    let iAmCreator = currentId.toString() === creatorId.toString(); 
+    res.render('details', { title: 'Product Details', product, iAmCreator });
 });
 
 router.get('/:productId/attach', isAuthenticated, async (req, res) => {
@@ -50,6 +54,7 @@ router.post('/:productId/attach', isAuthenticated, (req, res) => {
 router.get('/:productId/edit', isAuthenticated, (req, res) => {
     productService.getOne(req.params.productId)
         .then(product => {
+
             res.render('editCubePage', product);
         });
 });
